@@ -1,0 +1,506 @@
+/* =============================== */
+/*         ОБЩИЕ СТИЛИ           */
+/* =============================== */
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fff;
+  color: #333;
+}
+
+h1, h2, h3 {
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  padding: 60px 20px;
+}
+
+/* =============================== */
+/*         ШАПКА / МЕНЮ           */
+/* =============================== */
+
+.main-header {
+  background: #f7f7f7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.main-nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #222;
+  font-weight: 600;
+}
+
+.main-nav .auth-btn {
+  padding: 6px 12px;
+  background: #e63946;
+  color: white;
+  border-radius: 6px;
+}
+
+.main-nav .auth-btn:hover {
+  background: #c72936;
+}
+
+/* =============================== */
+/*        ГЛАВНАЯ СТРАНИЦА        */
+/* =============================== */
+
+/* Hero-блок */
+.hero {
+  background-size: cover;
+  background-position: center;
+  height: 90vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 800px;
+  padding: 20px;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+
+.hero-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.hero-content li::before {
+  content: "\2714 ";
+  color: #ff6161;
+}
+
+/* Преимущества */
+.features h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: auto;
+  text-align: center;
+}
+
+.feature {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.feature.highlight {
+  background-color: #dbe5ff;
+  color: #224488;
+}
+
+/* Услуги */
+.services {
+  text-align: center;
+  background-color: #f9f9f9;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: 40px auto 0;
+}
+
+.service img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Запись на осмотр */
+.appointment {
+  background: #1a1a1a;
+  color: white;
+  text-align: center;
+}
+
+.appointment form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.appointment input {
+  padding: 12px;
+  font-size: 1em;
+  border: none;
+  border-radius: 4px;
+  min-width: 240px;
+}
+
+.appointment button {
+  background: #4456ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  cursor: pointer;
+}
+
+.appointment button:hover {
+  background: #2f3fcf;
+}
+
+/* Отзывы */
+.reviews {
+  display: flex;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.review-card {
+  background: #f1f1f1;
+  padding: 20px;
+  border-radius: 6px;
+  width: 300px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.review-card h3 {
+  margin-bottom: 10px;
+  color: #222;
+}
+
+/* =============================== */
+/*       СТРАНИЦА: АВТОРИЗАЦИЯ    */
+/* =============================== */
+
+.auth-page {
+  background: url("/static/images/legacy.png") center/cover no-repeat;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-container {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 40px;
+  border-radius: 25px;
+  max-width: 900px;
+  width: 90%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.auth-title {
+  font-size: 1.6em;
+  margin-bottom: 30px;
+}
+
+.auth-forms {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 25px;
+  border-radius: 20px;
+  min-width: 250px;
+  flex: 1;
+}
+
+.auth-form input {
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1em;
+  background-color: rgba(255,255,255,0.9);
+}
+
+.auth-form button {
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  background: #f2f2f2;
+  font-size: 1em;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.auth-form button:hover {
+  background: #ddd;
+}
+
+/* =============================== */
+/*         СТРАНИЦА: ГАЛЕРЕЯ      */
+/* =============================== */
+
+.gallery-page {
+  background: white;
+  padding: 40px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.gallery-slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ccc;
+  border-radius: 100px 0 0 100px;
+  padding: 40px;
+  max-width: 1000px;
+  margin: 50px auto;
+  position: relative;
+}
+
+.slide-content {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.slide-text {
+  max-width: 400px;
+  font-size: 1.2em;
+  line-height: 1.6;
+}
+
+.slide-image img {
+  width: 300px;
+  border-radius: 10px;
+}
+
+.nav {
+  background: white;
+  border: none;
+  font-size: 2em;
+  padding: 15px 25px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.nav:hover {
+  background: #e3e3e3;
+}
+
+.prev {
+  position: absolute;
+  left: -30px;
+}
+
+.next {
+  position: absolute;
+  right: -30px;
+}
+
+/* =============================== */
+/*        СТРАНИЦА: ЗАКАЗ         */
+/* =============================== */
+
+.order-wrapper {
+  background: linear-gradient(to bottom, #d5cfe9, #eee);
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 1200px;
+  margin: 30px auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.order-title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 30px;
+  background-color: #ccc;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.order-box {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.order-left,
+.order-right {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.order-left input,
+.order-right select,
+.order-left textarea {
+  padding: 10px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  font-size: 1em;
+}
+
+.order-left textarea {
+  min-height: 80px;
+}
+
+.add-button {
+  padding: 10px 20px;
+  background: #fff;
+  border-radius: 30px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.add-button:hover {
+  background: #ddd;
+}
+
+.order-summary {
+  margin-top: 30px;
+  background: #eee;
+  border-radius: 20px;
+  padding: 25px;
+  font-size: 1.1em;
+}
+
+.order-item {
+  margin-bottom: 8px;
+  list-style: none;
+  position: relative;
+  padding-left: 24px;
+}
+
+.order-item::before {
+  content: "\2022";
+  color: #333;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+.total {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #e53935;
+  margin-top: 20px;
+}
+/* ==== Flash-сообщения (успех / ошибка / предупреждение / инфо) ==== */
+.flash {
+  padding: 12px;
+  border-radius: 6px;
+  margin: 10px auto;
+  max-width: 600px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Зеленый фон — успешное действие */
+.flash-success {
+  background: #d4edda;
+  color: #155724;
+}
+
+/* Красный фон — ошибка (например, неверный пароль) */
+.flash-danger {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* Желтый фон — предупреждение (например, не вошёл в аккаунт) */
+.flash-warning {
+  background: #fff3cd;
+  color: #856404;
+}
+
+/* Синий фон — просто информационное сообщение */
+.flash-info {
+  background: #cce5ff;
+  color: #004085;
+}
+/* Flash-сообщения */
+.flash-messages {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  text-align: center;
+}
+.flash {
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 500;
+}
+.flash-success { background-color: #d4edda; color: #155724; }
+.flash-danger  { background-color: #f8d7da; color: #721c24; }
+.flash-warning { background-color: #fff3cd; color: #856404; }
+.flash-info    { background-color: #d1ecf1; color: #0c5460; }
+.account-section {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 30px;
+  background: #fdfdfd;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.account-section h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.account-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}

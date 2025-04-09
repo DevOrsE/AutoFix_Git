@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Отзывы{% endblock %}
+{% block content %}
+
+<div class="container py-5">
+  <h2 class="text-center mb-4">Отзывы клиентов</h2>
+  <p class="text-center text-muted mb-5">Вот что говорят о нас наши довольные клиенты:</p>
+
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm border-primary">
+        <div class="card-body">
+          <h5 class="card-title">Даурен Джукусов</h5>
+          <p class="card-text">Сервис на высоте, ремонт и покраска как у дилера, но дешевле. Рекомендую!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm border-success">
+        <div class="card-body">
+          <h5 class="card-title">Ольга К</h5>
+          <p class="card-text">Понравился подход. Фото на каждом этапе, сроки соблюдены, всё супер.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm border-warning">
+        <div class="card-body">
+          <h5 class="card-title">Сергей Комбаров</h5>
+          <p class="card-text">Делал сложный ремонт. Всё сделали отлично, в срок. Спасибо!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Форма добавления отзыва (если понадобится) -->
+  {#
+  <div class="mt-5">
+    <h4>Оставьте свой отзыв</h4>
+    <form method="POST" action="/add_review">
+      <div class="mb-3">
+        <input type="text" name="name" class="form-control" placeholder="Ваше имя" required>
+      </div>
+      <div class="mb-3">
+        <textarea name="review" class="form-control" rows="3" placeholder="Ваш отзыв" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+  </div>
+  #}
+</div>
+
+{% endblock %}

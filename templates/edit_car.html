@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Редактировать авто{% endblock %}
+{% block content %}
+<div class="account-section">
+  <h2>Редактировать автомобиль</h2>
+  <form method="post">
+    <input name="brand" value="{{ car.Марка_автомобиля }}" required>
+    <input name="plate" value="{{ car.Регистрационный_знак }}" required>
+    <input name="year" value="{{ car.Год_выпуска }}" type="number" required>
+    <input name="body" value="{{ car.Кузов }}" required>
+    <input name="note" value="{{ car.Примечание }}">
+    <button type="submit">Сохранить изменения</button>
+  </form>
+</div>
+{% endblock %}

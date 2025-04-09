@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block title %}Главная{% endblock %}
+{% block content %}
+
+<!-- Hero-блок -->
+<section class="hero" style="background-image: url('/static/images/garage.jpg');">
+  <div class="overlay">
+    <div class="hero-content container text-center text-white">
+      <h1 class="display-4 fw-bold">Кузовной ремонт в Москве с честной гарантией 1 год</h1>
+      <ul class="list-unstyled mt-4">
+        <li>Как у дилера, но дешевле на 40%</li>
+        <li>Соблюдение сроков и технологических стандартов</li>
+        <li>15+ лет опыта</li>
+        <li>Оптовые цены на запчасти</li>
+        <li>Фотоотчет всего процесса</li>
+      </ul>
+      <p class="lead mt-3"><strong>Запишитесь на бесплатный осмотр или отправьте фото для расчета!</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- Преимущества -->
+<section class="features py-5 bg-light text-center">
+  <div class="container">
+    <h2 class="mb-4">Выбирая нас, вы получаете:</h2>
+    <div class="row g-4">
+      <div class="col-md-4"><div class="feature p-3 bg-white rounded shadow-sm">Квалифицированные сотрудники</div></div>
+      <div class="col-md-4"><div class="feature p-3 bg-white rounded shadow-sm">Соблюдение сроков</div></div>
+      <div class="col-md-4"><div class="feature p-3 bg-white rounded shadow-sm">Клиентская зона</div></div>
+      <div class="col-md-4"><div class="feature p-3 bg-white rounded shadow-sm">Современное оборудование</div></div>
+      <div class="col-md-4"><div class="feature p-3 bg-white rounded shadow-sm">Прозрачная смета</div></div>
+      <div class="col-md-4"><div class="feature p-3 bg-white rounded shadow-sm">Запчасти по оптовым ценам</div></div>
+      <div class="col-md-12"><div class="feature p-3 bg-success text-white rounded shadow-sm fw-bold">Гарантия 1 год на все виды работ</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Услуги -->
+<section class="services py-5">
+  <div class="container text-center">
+    <h2 class="mb-3">Все услуги в одном месте</h2>
+    <p>Мы оказываем полный спектр малярно-кузовных работ</p>
+    <div class="row g-4 mt-4">
+      <div class="col-md-3">
+        <div class="card h-100">
+          <img src="/static/images/insurance.jpg" class="card-img-top" alt="Ремонт по ОСАГО и КАСКО">
+          <div class="card-body"><p class="card-text">Ремонт по ОСАГО и КАСКО</p></div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card h-100">
+          <img src="/static/images/painting.jpg" class="card-img-top" alt="Покраска кузова и элементов">
+          <div class="card-body"><p class="card-text">Покраска кузова и элементов</p></div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card h-100">
+          <img src="/static/images/body-repair.jpg" class="card-img-top" alt="Восстановление кузова">
+          <div class="card-body"><p class="card-text">Восстановление кузова</p></div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card h-100">
+          <img src="/static/images/geometry.jpg" class="card-img-top" alt="Восстановление геометрии">
+          <div class="card-body"><p class="card-text">Восстановление геометрии</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Форма записи -->
+<section class="appointment bg-light py-5">
+  <div class="container text-center">
+    <h2 class="mb-4">Запишитесь на бесплатный осмотр</h2>
+    <form class="row justify-content-center g-3">
+      <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="Ваше имя" required>
+      </div>
+      <div class="col-md-4">
+        <input type="tel" class="form-control" placeholder="+7 (999) 999-99-99" required>
+      </div>
+      <div class="col-md-2">
+        <button type="submit" class="btn btn-primary w-100">Записаться</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Отзывы -->
+<section class="reviews py-5 text-center">
+  <div class="container">
+    <h2 class="mb-4">Отзывы</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="review-card p-3 border rounded shadow-sm">
+          <h5>Даурен Джукусов</h5>
+          <p>Сервис на высоте, ремонт и покраска как у дилера, но дешевле. Рекомендую!</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="review-card p-3 border rounded shadow-sm">
+          <h5>Ольга К</h5>
+          <p>Понравился подход. Фото на каждом этапе, сроки соблюдены, всё супер.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="review-card p-3 border rounded shadow-sm">
+          <h5>Сергей Комбаров</h5>
+          <p>Делал сложный ремонт. Всё сделали отлично, в срок. Спасибо!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Подвал -->
+<footer class="bg-dark text-white py-4 mt-5">
+  <div class="container d-flex justify-content-between">
+    <div>
+      <p class="mb-1">Разработка сайта — Студентом Лесотехнического факультета</p>
+      <p class="mb-0">Трепалиным Александром</p>
+    </div>
+    <div>
+      <h5>Контакты</h5>
+      <p class="mb-1">Г. Воронеж, пр. Ленина б-р, д. 65</p>
+      <p class="mb-0">info@uzauto.ru</p>
+    </div>
+  </div>
+</footer>
+
+{% endblock %}

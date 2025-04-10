@@ -107,13 +107,13 @@ def account():
         if form_type == "add":
             # Добавление нового авто
             new_car = Автомобили(
-                Марка_автомобиля=request.form.get("brand"),
                 Код_владельца=user.Код_владельца,
+                Код_модели=int(request.form.get("model_id")),  # предполагаем, что у тебя <select name="model_id">
                 Регистрационный_знак=request.form.get("plate"),
                 Год_выпуска=int(request.form.get("year")),
-                Кузов=request.form.get("body"),
                 Примечание=request.form.get("note") or "-"
             )
+
             db.session.add(new_car)
             db.session.commit()
             flash("Автомобиль добавлен", "success")

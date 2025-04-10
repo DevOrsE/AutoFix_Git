@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from models import db, Автомобили, НомерЗапчасти, ВидРабот, Заказы, Владельцы
 from datetime import date
 from werkzeug.security import generate_password_hash, check_password_hash
+from models import МоделиАвто
 
 app = Flask(__name__)
 app.secret_key = 'your-super-secret-key'

@@ -60,7 +60,7 @@ def auth():
                         Фамилия=request.form.get("last_name"),
                         Имя=request.form.get("first_name"),
                         Отчество="-",
-                        Терефон=request.form.get("phone"),
+                        Телефон=request.form.get("phone"),
                         Примечание="-",
                         Логин=login,
                         Пароль=generate_password_hash(password)
@@ -95,8 +95,8 @@ def account():
     cars = Автомобили.query.filter_by(Код_владельца=user.Код_владельца).all()
 
     # Получаем уникальные марки и кузова из таблицы Автомобили
-    unique_brands = db.session.query(Автомобили.Марка_автомобиля).distinct().all()
-    unique_bodies = db.session.query(Автомобили.Кузов).distinct().all()
+    unique_brands = db.session.query(МоделиАвто.Марка).distinct().all()
+    unique_bodies = db.session.query(МоделиАвто.Кузов).distinct().all()
     unique_brands = [row[0] for row in unique_brands]
     unique_bodies = [row[0] for row in unique_bodies]
 

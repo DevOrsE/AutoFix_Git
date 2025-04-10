@@ -43,25 +43,25 @@
     <div class="row g-4 mt-4">
       <div class="col-md-3">
         <div class="card h-100">
-          <img src="/static/images/insurance.jpg" class="card-img-top" alt="Ремонт по ОСАГО и КАСКО">
+          <img src="{{ url_for('static', filename='images/insurance.jpg') }}" class="card-img-top" alt="Ремонт по ОСАГО и КАСКО">
           <div class="card-body"><p class="card-text">Ремонт по ОСАГО и КАСКО</p></div>
         </div>
       </div>
       <div class="col-md-3">
         <div class="card h-100">
-          <img src="/static/images/painting.jpg" class="card-img-top" alt="Покраска кузова и элементов">
+          <img src="{{ url_for('static', filename='images/painting.jpg') }}" class="card-img-top" alt="Покраска кузова и элементов">
           <div class="card-body"><p class="card-text">Покраска кузова и элементов</p></div>
         </div>
       </div>
       <div class="col-md-3">
         <div class="card h-100">
-          <img src="/static/images/body-repair.jpg" class="card-img-top" alt="Восстановление кузова">
+          <img src="{{ url_for('static', filename='images/body-repair.jpg') }}" class="card-img-top" alt="Восстановление кузова">
           <div class="card-body"><p class="card-text">Восстановление кузова</p></div>
         </div>
       </div>
       <div class="col-md-3">
         <div class="card h-100">
-          <img src="/static/images/geometry.jpg" class="card-img-top" alt="Восстановление геометрии">
+          <img src="{{ url_for('static', filename='images/geometry.jpg') }}" class="card-img-top" alt="Восстановление геометрии">
           <div class="card-body"><p class="card-text">Восстановление геометрии</p></div>
         </div>
       </div>
@@ -113,20 +113,4 @@
     </div>
   </div>
 </section>
-
-<!-- Подвал -->
-<footer class="bg-dark text-white py-4 mt-5">
-  <div class="container d-flex justify-content-between">
-    <div>
-      <p class="mb-1">Разработка сайта — Студентом Лесотехнического факультета</p>
-      <p class="mb-0">Трепалиным Александром</p>
-    </div>
-    <div>
-      <h5>Контакты</h5>
-      <p class="mb-1">Г. Воронеж, пр. Ленина б-р, д. 65</p>
-      <p class="mb-0">info@uzauto.ru</p>
-    </div>
-  </div>
-</footer>
-
 {% endblock %}

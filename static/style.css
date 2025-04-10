@@ -141,9 +141,9 @@ section {
 
 .service img {
   width: 100%;
-  height: 180px;
+  height: 180px; /* или любая нужная высота */
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
 /* Запись на осмотр */
@@ -503,4 +503,64 @@ section {
   flex-direction: column;
   gap: 10px;
   margin-top: 20px;
+}
+/* Подвал */
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px;
+  background-color: #333;
+  color: white;
+  flex-wrap: wrap;
+}
+
+.footer-left p {
+  margin: 4px 0;
+}
+
+.footer-links {
+  display: flex;
+  gap: 40px;
+}
+
+.footer-links h4 {
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.footer-links a {
+  color: #ccc;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 5px;
+}
+/*Навигация для меню*/
+.navbar-fixed {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  background-color: #222; /* или другой цвет фона */
+  padding: 15px 30px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.navbar-fixed nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-fixed nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Добавим отступ под фиксированное меню, чтобы контент не прилипал к верху */
+body {
+  padding-top: 80px; /* подгони под высоту твоего меню */
 }

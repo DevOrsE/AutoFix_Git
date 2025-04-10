@@ -10,7 +10,7 @@
     <!-- Пример изображения -->
     <div class="col-sm-6 col-md-4 col-lg-3">
       <div class="card h-100 shadow-sm">
-        <img src="/static/images/car1.jpg" class="card-img-top" alt="Авто до ремонта">
+        <img src="{{ url_for('static', filename='images/car1.jpg') }}" class="card-img-top" alt="Авто до ремонта">
         <div class="card-body">
           <h5 class="card-title">Audi A6</h5>
           <p class="card-text">Полировка и восстановление бампера</p>
@@ -21,7 +21,7 @@
     <!-- Добавь больше изображений по аналогии -->
     <div class="col-sm-6 col-md-4 col-lg-3">
       <div class="card h-100 shadow-sm">
-        <img src="/static/images/car2.jpg" class="card-img-top" alt="Авто после ремонта">
+        <img src="{{ url_for('static', filename='images/car2.jpg') }}" class="card-img-top" alt="Авто после ремонта">
         <div class="card-body">
           <h5 class="card-title">Toyota Camry</h5>
           <p class="card-text">Полная перекраска кузова</p>

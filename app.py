@@ -136,13 +136,14 @@ def account():
             flash("Данные авто обновлены", "success")
 
         return redirect(url_for("account"))
-
+    car_models = МоделиАвто.query.all()
     return render_template(
         "account.html",
         user=user,
         cars=cars,
         unique_brands=unique_brands,
-        unique_bodies=unique_bodies
+        unique_bodies=unique_bodies,
+        car_models=car_models
     )
 
 @app.route("/order", methods=["GET", "POST"])

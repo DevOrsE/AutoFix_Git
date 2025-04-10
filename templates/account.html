@@ -23,28 +23,24 @@
   {% endif %}
 
   <hr>
-  <h3>Добавить автомобиль</h3>
-  <form method="post">
-    <label>Марка автомобиля:</label>
-    <select name="brand" required>
-      <option value="">Выберите марку</option>
-      {% for brand in unique_brands %}
-      <option value="{{ brand }}">{{ brand }}</option>
-      {% endfor %}
-    </select>
+  <hr>
+<h3>Добавить автомобиль</h3>
+<form method="post">
+  <label for="model_id">Модель авто:</label>
+  <select id="model_id" name="model_id" required>
+    <option value="">Выберите модель</option>
+    {% for model in car_models %}
+      <option value="{{ model.Код_модели }}">{{ model.Марка }} {{ model.Модель }}</option>
+    {% endfor %}
+  </select>
 
-    <label>Кузов:</label>
-    <select name="body" required>
-      <option value="">Выберите тип кузова</option>
-      {% for body in unique_bodies %}
-      <option value="{{ body }}">{{ body }}</option>
-      {% endfor %}
-    </select>
-    <input type="hidden" name="form_type" value="add">
-    <input name="plate" placeholder="Регистрационный знак" required>
-    <input name="year" placeholder="Год выпуска" type="number" required>
-    <input name="note" placeholder="Примечание">
-    <button type="submit">Добавить</button>
+  <input type="hidden" name="form_type" value="add">
+  <input name="plate" placeholder="Регистрационный знак" required>
+  <input name="year" placeholder="Год выпуска" type="number" required>
+  <input name="note" placeholder="Примечание">
+  <button type="submit">Добавить</button>
+</form>
+
   </form>
 </section>
 {% endblock %}

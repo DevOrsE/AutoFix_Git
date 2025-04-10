@@ -29,6 +29,8 @@ class Автомобили(db.Model):
     Регистрационный_знак = db.Column(db.String(40), nullable=False)
     Год_выпуска = db.Column(db.Integer, nullable=False)
     Примечание = db.Column(db.String(100))
+    владелец = db.relationship('Владельцы', backref=db.backref('автомобили', lazy=True))
+    модель = db.relationship('МоделиАвто', backref=db.backref('автомобили', lazy=True))
 
 class ВидРабот(db.Model):
     __tablename__ = 'ВидРабот'

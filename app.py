@@ -31,6 +31,24 @@ def index():
 @app.route("/gallery")
 def gallery():
     return render_template("gallery.html")
+@app.route("/delete_car/<int:car_id>")
+def delete_car(car_id):
+    if "user_id" not in session:
+        flash("Пожалуйста, войдите в аккаунт", "warning")
+        return redirect(url_for("auth"))
+
+    user = Владельцы.query.get(session["user_id"])
+    car = Автомобили.query.get_or_404(car_id)
+
+    # Убедимся, что пользователь удаляет только своё авто
+    if car.Код_владельца != user.Код_владельца:
+        flash("Нет доступа к этому автомобилю", "danger")
+        return redirect(url_for("account"))
+
+    db.session.delete(car)
+    db.session.commit()
+    flash("Автомобиль удалён", "success")
+    return redirect(url_for("account"))
 
 @app.route("/reviews")
 def reviews():

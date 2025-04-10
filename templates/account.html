@@ -27,12 +27,13 @@
 <h3>Добавить автомобиль</h3>
 <form method="post">
   <label for="model_id">Модель авто:</label>
-  <select id="model_id" name="model_id" required>
-    <option value="">Выберите модель</option>
-    {% for model in car_models %}
+    <select id="model_id" name="model_id" required>
+      <option value="">Выберите модель</option>
+      {% for model in car_models %}
       <option value="{{ model.Код_модели }}">{{ model.Марка }} {{ model.Модель }}</option>
-    {% endfor %}
-  </select>
+      {% endfor %}
+    </select>
+
 
   <input type="hidden" name="form_type" value="add">
   <input name="plate" placeholder="Регистрационный знак" required>

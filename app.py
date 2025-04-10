@@ -35,6 +35,29 @@ def gallery():
 @app.route("/reviews")
 def reviews():
     return render_template("reviews.html")
+@app.route("/edit_car/<int:car_id>", methods=["GET", "POST"])
+def edit_car(car_id):
+    if "user_id" not in session:
+        flash("Пожалуйста, войдите в аккаунт", "warning")
+        return redirect(url_for("auth"))
+
+    car = Автомобили.query.get_or_404(car_id)
+    if car.Код_владельца != session["user_id"]:
+        flash("Нет доступа к этому автомобилю", "danger")
+        return redirect(url_for("account"))
+
+    models = МоделиАвто.query.all()
+
+    if request.method == "POST":
+        car.Код_модели = int(request.form.get("model_id"))
+        car.Регистрационный_знак = request.form.get("plate")
+        car.Год_выпуска = int(request.form.get("year"))
+        car.Примечание = request.form.get("note")
+        db.session.commit()
+        flash("Данные автомобиля обновлены", "success")
+        return redirect(url_for("account"))
+
+    return render_template("edit_car.html", car=car, models=models)
 
 @app.route("/auth", methods=["GET", "POST"])
 def auth():
@@ -105,19 +128,27 @@ def account():
         form_type = request.form.get("form_type")
 
         if form_type == "add":
-            # Добавление нового авто
-            new_car = Автомобили(
-                Код_владельца=user.Код_владельца,
-                Код_модели=int(request.form.get("model_id")),  # предполагаем, что у тебя <select name="model_id">
-                Регистрационный_знак=request.form.get("plate"),
-                Год_выпуска=int(request.form.get("year")),
-                Примечание=request.form.get("note") or "-"
-            )
+            model_id = request.form.get("model_id")
 
-            db.session.add(new_car)
-            db.session.commit()
-            flash("Автомобиль добавлен", "success")
+            if not model_id:
+                flash("Выберите модель автомобиля", "danger")
+                return redirect(url_for("account"))
 
+            try:
+                new_car = Автомобили(
+                    Код_владельца=user.Код_владельца,
+                    Код_модели=int(model_id),
+                    Регистрационный_знак=request.form.get("plate"),
+                    Год_выпуска=int(request.form.get("year")),
+                    Примечание=request.form.get("note") or "-"
+                )
+
+                db.session.add(new_car)
+                db.session.commit()
+                flash("Автомобиль добавлен", "success")
+            except Exception as e:
+                db.session.rollback()
+                flash(f"Ошибка при добавлении автомобиля: {e}", "danger")
         elif form_type == "edit":
             # Редактирование авто
             car_id = int(request.form.get("car_id"))

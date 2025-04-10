@@ -1,15 +1,29 @@
 {% extends "base.html" %}
 {% block title %}Редактировать авто{% endblock %}
+
 {% block content %}
-<div class="account-section">
-  <h2>Редактировать автомобиль</h2>
+<section class="account-section">
+  <h2>Редактирование автомобиля</h2>
   <form method="post">
-    <input name="brand" value="{{ car.Марка_автомобиля }}" required>
+    <label>Модель:</label>
+    <select name="model_id" required>
+      {% for model in models %}
+        <option value="{{ model.Код_модели }}" {% if model.Код_модели == car.Код_модели %}selected{% endif %}>
+          {{ model.Марка }} {{ model.Модель }}
+        </option>
+      {% endfor %}
+    </select>
+
+    <label>Регистрационный знак:</label>
     <input name="plate" value="{{ car.Регистрационный_знак }}" required>
-    <input name="year" value="{{ car.Год_выпуска }}" type="number" required>
-    <input name="body" value="{{ car.Кузов }}" required>
+
+    <label>Год выпуска:</label>
+    <input name="year" type="number" value="{{ car.Год_выпуска }}" required>
+
+    <label>Примечание:</label>
     <input name="note" value="{{ car.Примечание }}">
+
     <button type="submit">Сохранить изменения</button>
   </form>
-</div>
+</section>
 {% endblock %}

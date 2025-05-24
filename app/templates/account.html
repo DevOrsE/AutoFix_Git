@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% block title %}Аккаунт{% endblock %}
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="container mt-3">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+<section class="account-section">
+  <h2>Добро пожаловать, {{ user.Имя }} {{ user.Фамилия }}!</h2>
+  <p><strong>Телефон:</strong> {{ user.phone or "Не указан" }}</p>
+  <p><strong>Логин:</strong> {{ user.login }}</p>
+
+  <hr>
+  <h3>Ваши автомобили</h3>
+{% if cars %}
+  <ul class="list-group">
+    {% for car in cars %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>{{ car.model.name }}</strong><br>
+          <small>Номер: {{ car.plate_number }} | Год: {{ car.year }}</small><br>
+          {% if car.note %}<small>Заметка: {{ car.note }}</small>{% endif %}
+        </div>
+        <div>
+          <a href="{{ url_for('cars.edit_car', car_id=car.id) }}" class="btn btn-sm btn-warning">✏️</a>
+          <form method="POST" action="{{ url_for('cars.delete_car', car_id=car.id) }}" style="display:inline;">
+            {{ delete_forms[car.id].hidden_tag() }}
+            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Удалить авто?')">🗑️</button>
+          </form>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>У вас пока нет автомобилей.</p>
+{% endif %}
+
+
+  <hr>
+  <hr>
+  <h3>Добавить автомобиль</h3>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+      {{ form.model_id.label(class="form-label") }}
+      {{ form.model_id(class="form-select") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.plate.label(class="form-label") }}
+      {{ form.plate(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.year.label(class="form-label") }}
+      {{ form.year(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.note.label(class="form-label") }}
+      {{ form.note(class="form-control") }}
+    </div>
+
+    {{ form.submit(class="btn btn-success") }}
+  </form>
+</section>
+
+<hr class="mt-5 mb-4">
+<h3 class="text-center mb-4">🛠 Ваши заказы</h3>
+
+{% if orders %}
+  <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+    {% for order in orders %}
+      <div class="col">
+        <div class="card border-primary shadow-sm h-100">
+          <div class="card-header bg-primary text-white d-flex justify-content-between">
+            <div>
+              🚗 {{ order.car.model.name }}<br>
+              <small>{{ order.car.plate_number }}</small>
+            </div>
+            <small>{{ order.created_at.strftime('%d.%m.%Y %H:%M') }}</small>
+          </div>
+
+          <div class="card-body">
+            {% for item in order.items %}
+              <div class="d-flex justify-content-between mb-2">
+                <div>
+                  <strong>{{ item.service_type.name }}</strong>
+                  {% if item.part %}
+                    <br><small class="text-muted">деталь: {{ item.part.code }}</small>
+                  {% endif %}
+                </div>
+                <strong>{{ item.price }} ₽</strong>
+              </div>
+            {% endfor %}
+
+            <hr>
+            <div class="d-flex justify-content-between">
+              <span><strong>Итого:</strong></span>
+              <span><strong>{{ order.total_price }} ₽</strong></span>
+            </div>
+            {% if order.master_fee %}
+              <small class="text-muted">Включено: наценка мастера {{ order.master_fee }} ₽</small>
+            {% endif %}
+
+            {% if order.fail_reason %}
+              <div class="mt-3 text-danger">
+                <strong>❌ Причина отказа:</strong>
+                <div>{{ order.fail_reason }}</div>
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="card-footer d-flex justify-content-between align-items-center">
+            <div>
+              <strong>Статус:</strong>
+              {% if order.status == 'выполнено' %}
+                <span class="badge bg-success">Выполнено</span>
+              {% elif order.status == 'невозможно' %}
+                <span class="badge bg-danger">Невозможно</span>
+              {% else %}
+                <span class="badge bg-warning text-dark">Ожидает</span>
+              {% endif %}
+            </div>
+            <a href="{{ url_for('main.order_receipt_pdf', order_id=order.id) }}" class="btn btn-outline-success mt-2">
+              Оплата
+            </a>
+
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="text-muted text-center">У вас пока нет заказов.</p>
+{% endif %}
+
+
+
+{% endblock %}

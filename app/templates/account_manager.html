@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}Менеджер: все заказы{% endblock %}
+{% block content %}
+
+<div class="container my-4">
+  <h2 class="mb-4 text-center">📋 Все заказы клиентов</h2>
+
+  <form method="get" class="d-flex align-items-center mb-4">
+    <label for="sort" class="me-2 fw-bold">Сортировка:</label>
+    <select name="sort" id="sort" class="form-select w-auto" onchange="this.form.submit()">
+      <option value="date_desc" {% if sort == 'date_desc' %}selected{% endif %}>По дате (новые)</option>
+      <option value="date_asc" {% if sort == 'date_asc' %}selected{% endif %}>По дате (старые)</option>
+      <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>По цене (убыв.)</option>
+      <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>По цене (возр.)</option>
+      <option value="status" {% if sort == 'status' %}selected{% endif %}>По статусу</option>
+    </select>
+  </form>
+
+  {% if orders %}
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+      {% for order, car, owner in orders %}
+        <div class="col">
+          <div class="card shadow-sm border-primary h-100">
+            <div class="card-header bg-primary text-white">
+              🚗 {{ car.model.name }} — {{ car.plate_number }}<br>
+              👤 {{ owner.login }} | 📞 {{ owner.phone or "Не указан" }}
+            </div>
+
+            <div class="card-body">
+              {% for item in order.items %}
+                <div class="d-flex justify-content-between mb-2">
+                  <div>
+                    <strong>{{ item.service_type.name }}</strong><br>
+                    <small class="text-muted">деталь: {{ item.part.code }}</small>
+                  </div>
+                  <strong>{{ item.price }} ₽</strong>
+                </div>
+              {% endfor %}
+
+              <hr>
+              <p><strong>Итого:</strong> {{ order.total_price }} ₽</p>
+              <p><strong>Наценка:</strong> {{ order.master_fee }} ₽</p>
+
+              {% if order.fail_reason %}
+                <p class="text-danger"><strong>Причина отказа:</strong> {{ order.fail_reason }}</p>
+              {% endif %}
+            </div>
+
+            <div class="card-footer">
+                 <!-- Кнопка "Выполнен" -->
+            <form action="{{ url_for('orders.mark_done', order_id=order.id) }}" method="post" style="display:inline;">
+              {{ csrf_token() }}
+              <button class="btn btn-sm btn-success">Выполнен</button>
+            </form>
+
+              <!-- Кнопка "Невозможно выполнить" -->
+            <button class="btn btn-warning btn-sm" data-bs-toggle="collapse" data-bs-target="#fail{{ order.id }}">⚠️ Невозможно</button>
+
+              <div class="collapse mt-2" id="fail{{ order.id }}">
+                <form method="post" action="{{ url_for('orders.mark_failed', order_id=order.id) }}">
+                  {{ csrf_token() }}
+                  <input type="text" name="reason" class="form-control form-control-sm mb-2" placeholder="Указать причину">
+                  <button type="submit" class="btn btn-sm btn-danger">Отправить</button>
+                </form>
+              </div>
+
+
+              <div class="mt-2">
+                <strong>Статус:</strong>
+                {% if order.status == 'выполнено' %}
+                  <span class="badge bg-success">выполнено</span>
+                {% elif order.status == 'невозможно' %}
+                  <span class="badge bg-danger">невозможно</span>
+                {% else %}
+                  <span class="badge bg-warning text-dark">ожидает</span>
+                {% endif %}
+              </div>
+              <a href="{{ url_for('main.order_receipt_pdf', order_id=order.id) }}" class="btn btn-outline-primary mt-2">
+                Чек
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-center text-muted">Нет заказов.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

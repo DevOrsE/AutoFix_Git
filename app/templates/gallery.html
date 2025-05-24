@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Галерея{% endblock %}
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="container mt-3">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<div class="container py-5">
+  <h2 class="text-center mb-4">Галерея работ</h2>
+  <p class="text-center mb-4">Вот примеры наших работ до и после ремонта.</p>
+
+  <div class="row g-4">
+    <!-- Пример изображения -->
+    <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="card h-100 shadow-sm">
+        <img src="{{ url_for('static', filename='images/car2.jpg') }}" class="card-img-top" alt="Авто до ремонта">
+        <div class="card-body">
+          <h5 class="card-title">ВАЗ 2107</h5>
+          <p class="card-text">Покраска, Замена порогов автомобиля</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Добавь больше изображений по аналогии -->
+    <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="card h-100 shadow-sm">
+        <img src="{{ url_for('static', filename='images/21.jpg') }}" class="card-img-top" alt="Авто после ремонта">
+        <div class="card-body">
+          <h5 class="card-title">ВАЗ 2105</h5>
+          <p class="card-text">Полная покраска кузова</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="card h-100 shadow-sm">
+        <img src="{{ url_for('static', filename='images/car4.jpg') }}" class="card-img-top" alt="Авто после ремонта">
+        <div class="card-body">
+          <h5 class="card-title">Subaru legacy </h5>
+          <p class="card-text">Полная перекраска кузова</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="card h-100 shadow-sm">
+        <img src="{{ url_for('static', filename='images/car3.jpg') }}" class="card-img-top" alt="Авто после ремонта">
+        <div class="card-body">
+          <h5 class="card-title">Subaru Impreza</h5>
+          <p class="card-text">Полная перекраска кузова</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Пример заглушки (если нет картинок) -->
+    {% if not images %}
+      <div class="col-12">
+        <div class="alert alert-info text-center">
+          Изображения пока не загружены.
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}AutoFix{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Шапка / Меню -->
+<header class="navbar-fixed"></header>
+
+<nav class="main-nav navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+  <a href="{{ url_for('main.index') }}">Главная</a>
+  <a href="{{ url_for('orders.create_order') }}">Заказ</a>
+  <a href="{{ url_for('main.gallery') }}">Галерея</a>
+
+  {% if current_user.is_authenticated %}
+    <span class="nav-item text-muted me-3">👤 {{ current_user.login }}</span>
+    <a href="{{ url_for('main.account') }}" class="auth-link">Аккаунт</a>
+    <a href="{{ url_for('auth.logout') }}" class="auth-link">Выйти</a>
+  {% else %}
+    <a href="{{ url_for('auth.auth') }}" class="auth-link">Вход / Регистрация</a>
+  {% endif %}
+</nav>
+
+<main>
+  {% block content %}{% endblock %}
+  {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</main>
+
+<!-- Подвал -->
+<footer>
+  <div class="footer-left">
+    <p>Разработка сайта — Студентом ВГЛТУ</p>
+    <p>Трепалиным Александром</p>
+  </div>
+  <div class="footer-links">
+    <div>
+      <h4>Документы</h4>
+      <a href="#">Пользовательское соглашение</a>
+    </div>
+    <div>
+      <h4>Контакты</h4>
+      <p>Г. Воронеж, пр. Ленина б-р, д. 65</p>
+      <p>info@uzauto.ru</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- 👇 Добавляем сюда блок скриптов -->
+{% block scripts %}{% endblock %}
+
+</body>
+</html>

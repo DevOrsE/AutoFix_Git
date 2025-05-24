@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Edit Car{% endblock %}
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="container mt-3">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+<div class="container mt-5">
+  <h2 class="mb-4">Edit Car</h2>
+  <form method="POST">
+    <div class="mb-3">
+      <label for="model_id" class="form-label">Model:</label>
+      <select name="model_id" class="form-select" required>
+        {% for model in models %}
+          <option value="{{ model.id }}" {% if model.id == car.model_id %}selected{% endif %}>
+            {{ model.name }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Plate Number:</label>
+      <input name="plate" class="form-control" value="{{ car.plate_number }}" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Year:</label>
+      <input name="year" type="number" class="form-control" value="{{ car.year }}" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Note:</label>
+      <input name="note" class="form-control" value="{{ car.note }}">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+  </form>
+</div>
+{% endblock %}

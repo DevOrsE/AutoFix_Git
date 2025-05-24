@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        @font-face {
+            font-family: "DejaVuSans";
+            src: url("file:///C:/Users/DevOrsE/PycharmProjects/PythonProject1/app/static/fonts/DejaVuSans.ttf");
+        }
+
+
+        body {
+            font-family: "DejaVuSans", sans-serif;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+        }
+
+        .qr {
+            margin-top: 40px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>Чек по заказу №{{ order.id }}</h2>
+    <p><strong>Клиент:</strong> {{ order.car.owner.login }}</p>
+    <p><strong>Телефон:</strong> {{ order.car.owner.phone }}</p>
+    <p><strong>Авто:</strong> {{ order.car.model.name }} ({{ order.car.plate_number }})</p>
+    <p><strong>Дата:</strong> {{ order.created_at.strftime('%d.%m.%Y') }}</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Кузовная деталь</th>
+                <th>Тип ремонта</th>
+                <th>Цена</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.items %}
+            <tr>
+                <td>
+  {% if item.body_part %}
+    {{ item.body_part.name }}
+  {% else %}
+    <em style="color:red">нет детали</em>
+  {% endif %}
+</td>
+                <td>{{ item.service_type.name }}</td>
+                <td>{{ item.price }} ₽</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p><strong>Итого:</strong> {{ order.total_price }} ₽</p>
+
+    <div class="qr">
+        <p>Для оплаты отсканируйте QR-код:</p>
+        <img src="{{ qr_path }}" width="180">
+    </div>
+</body>
+</html>

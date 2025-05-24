@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="container mt-3">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <div class="mb-3">
+            {{ form.recaptcha }}
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<div class="container mt-5">
+  <h2 class="mb-4">Регистрация</h2>
+  <form method="POST" action="{{ url_for('auth.register') }}">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+      {{ form.login.label(class="form-label") }}
+      {{ form.login(class="form-control", placeholder="Введите логин") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.password.label(class="form-label") }}
+      {{ form.password(class="form-control", placeholder="Введите пароль") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.confirm_password.label(class="form-label") }}
+      {{ form.confirm_password(class="form-control", placeholder="Повторите пароль") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.phone.label }}
+      {{ form.phone(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.recaptcha }}
+    </div>
+
+    <button type="submit" class="btn btn-success">{{ form.submit.label.text }}</button>
+  </form>
+
+  <hr class="my-5">
+
+  <p>Уже есть аккаунт? <a href="{{ url_for('auth.auth') }}">Войти</a></p>
+</div>
+
+{% endblock %}

@@ -68,7 +68,7 @@
               <div class="mt-2">
                 <strong>Статус:</strong>
                 {% if order.status == 'выполнено' %}
-                  <span class="badge bg-success">выполнено</span>
+                  <span class="btn btn-success btn-sm btn-complete" data-order-id="{{ order.id }}">выполнено</span>
                 {% elif order.status == 'невозможно' %}
                   <span class="badge bg-danger">невозможно</span>
                 {% else %}

@@ -64,7 +64,14 @@ def account():
         return redirect(url_for('main.account'))
 
     cars = Car.query.filter_by(owner_id=current_user.id).all()
-    orders = Order.query.join(Car).filter(Car.owner_id == current_user.id).all()
+    orders = Order.query \
+    .join(Car) \
+    .filter(Car.owner_id == current_user.id) \
+    .options(
+        joinedload(Order.items).joinedload(OrderItem.part),
+        joinedload(Order.items).joinedload(OrderItem.service_type),
+        joinedload(Order.items).joinedload(OrderItem.body_part)
+    ).all()
     delete_forms = {car.id: DeleteCarForm() for car in cars}
 
     return render_template(

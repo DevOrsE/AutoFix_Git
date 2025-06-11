@@ -20,8 +20,9 @@ function addWorkItem() {
   const serviceText = serviceSelect.options[serviceSelect.selectedIndex].text;
   const bodyText = bodyPartSelect.options[bodyPartSelect.selectedIndex].text;
 
-  const priceMatch = serviceText.match(/—\\s([\\d.,]+)/);
+  const priceMatch = serviceText.match(/(\d+(?:[.,]\d+)?)\s*₽/);
   const price = priceMatch ? parseFloat(priceMatch[1].replace(",", ".")) : 0;
+
 
   items.push({
     part_id: parseInt(partId),
@@ -99,8 +100,40 @@ function submitOrder() {
   })
   .catch(err => alert("Ошибка при отправке: " + err));
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("add-item").addEventListener("click", addWorkItem);
-  document.getElementById("submit-order").addEventListener("click", submitOrder);
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".btn-complete").forEach(btn => {
+    btn.addEventListener("click", function () {
+      const orderId = this.dataset.orderId;
+      fetch(`/orders/${orderId}/complete`, {
+        method: "POST",
+        headers: {
+          "X-CSRFToken": getCookie("csrf_token")  // если включён CSRF
+        }
+      }).then(res => {
+        if (res.ok) {
+          // Удаляем карточку
+          this.closest(".col").remove();
+        } else {
+          alert("Не удалось обновить статус.");
+        }
+      });
+    });
+  });
 });
+
+// Функция для чтения куки (если CSRF включён)
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== "") {
+    const cookies = document.cookie.split(";");
+    for (let cookie of cookies) {
+      cookie = cookie.trim();
+      if (cookie.startsWith(name + "=")) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+

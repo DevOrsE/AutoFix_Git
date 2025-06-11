@@ -124,3 +124,10 @@ def mark_failed(order_id):
     db.session.commit()
     flash("Заказ отмечен как невозможный", "danger")
     return redirect(url_for("main.account"))
+@orders_bp.route("/orders/<int:order_id>/complete", methods=["POST"])
+@login_required
+def complete_order(order_id):
+    order = Order.query.get_or_404(order_id)
+    order.status = "выполнено"
+    db.session.commit()
+    return "", 204  # успех без тела

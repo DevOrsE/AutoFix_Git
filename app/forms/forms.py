@@ -1,7 +1,10 @@
-from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import StringField, PasswordField, IntegerField, SubmitField, TextAreaField, SelectField
 from wtforms.validators import DataRequired, Length, EqualTo, Optional
 from flask_wtf.recaptcha import RecaptchaField
+from flask_wtf import FlaskForm
+from wtforms import StringField, IntegerField, TextAreaField, SubmitField, SelectField
+from wtforms.validators import DataRequired, NumberRange
+from app.models.models import CarModel
 
 class RegistrationForm(FlaskForm):
     login = StringField("Login", validators=[DataRequired(), Length(min=3, max=50)])
@@ -41,6 +44,17 @@ class OrderForm(FlaskForm):
     part_number_id = SelectField("Номер запчасти (необязательно)", coerce=int, validators=[Optional()])
     description = TextAreaField("Описание", validators=[DataRequired()])
     submit = SubmitField("Оформить заказ")
+
+class CarForm(FlaskForm):
+    model_id = SelectField("Модель", coerce=int, validators=[DataRequired()])
+    plate = StringField("Гос. номер", validators=[DataRequired()])
+    year = IntegerField("Год выпуска", validators=[DataRequired(), NumberRange(min=1900, max=2100)])
+    note = TextAreaField("Заметка")
+    submit = SubmitField("Добавить автомобиль")
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.model_id.choices = [(model.id, model.name) for model in CarModel.query.all()]
 
 class AddCarForm(FlaskForm):
     model_id = SelectField('Model', coerce=int, validators=[DataRequired()])

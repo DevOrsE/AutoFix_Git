@@ -1,9 +1,10 @@
-from wtforms import StringField, PasswordField, IntegerField, SubmitField, TextAreaField, SelectField
-from wtforms.validators import DataRequired, Length, EqualTo, Optional
+from wtforms import PasswordField, IntegerField, SubmitField, TextAreaField, SelectField
+from wtforms.validators import EqualTo, Optional
 from flask_wtf.recaptcha import RecaptchaField
+from wtforms.validators import DataRequired, NumberRange
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, TextAreaField, SubmitField, SelectField
-from wtforms.validators import DataRequired, NumberRange
+from wtforms.validators import DataRequired, Length
 from app.models.models import CarModel
 
 class RegistrationForm(FlaskForm):
@@ -56,12 +57,16 @@ class CarForm(FlaskForm):
         super().__init__(*args, **kwargs)
         self.model_id.choices = [(model.id, model.name) for model in CarModel.query.all()]
 
-class AddCarForm(FlaskForm):
-    model_id = SelectField('Model', coerce=int, validators=[DataRequired()])
-    plate = StringField('Plate number', validators=[DataRequired()])
-    year = IntegerField('Year', validators=[DataRequired()])
-    note = TextAreaField('Note')
-    submit = SubmitField('Add Car')
+class CarAddForm(FlaskForm):
+    model_id = SelectField('Модель автомобиля', coerce=int, validators=[DataRequired()])
+    plate = StringField('Госномер', validators=[DataRequired(), Length(max=20)])
+    year = IntegerField('Год выпуска', validators=[DataRequired()])
+    note = TextAreaField('Заметка')
+    submit = SubmitField('Добавить')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.model_id.choices = [(m.id, m.name) for m in CarModel.query.order_by(CarModel.name).all()]
 
 class DeleteCarForm(FlaskForm):
     pass  # только CSRF токен

@@ -47,31 +47,32 @@
   <hr>
   <hr>
   <h3>Добавить автомобиль</h3>
-  <form method="POST">
-    {{ form.hidden_tag() }}
+<form method="POST">
+  {{ form.hidden_tag() }}
 
-    <div class="mb-3">
-      {{ form.model_id.label(class="form-label") }}
-      {{ form.model_id(class="form-select") }}
-    </div>
+  <div class="mb-3">
+    {{ form.model_id.label(class="form-label") }}
+    {{ form.model_id(class="form-select") }}
+  </div>
 
-    <div class="mb-3">
-      {{ form.plate.label(class="form-label") }}
-      {{ form.plate(class="form-control") }}
-    </div>
+  <div class="mb-3">
+    {{ form.plate_number.label(class="form-label") }}
+    {{ form.plate_number(class="form-control") }}
+  </div>
 
-    <div class="mb-3">
-      {{ form.year.label(class="form-label") }}
-      {{ form.year(class="form-control") }}
-    </div>
+  <div class="mb-3">
+    {{ form.year.label(class="form-label") }}
+    {{ form.year(class="form-control") }}
+  </div>
 
-    <div class="mb-3">
-      {{ form.note.label(class="form-label") }}
-      {{ form.note(class="form-control") }}
-    </div>
+  <div class="mb-3">
+    {{ form.note.label(class="form-label") }}
+    {{ form.note(class="form-control") }}
+  </div>
 
-    {{ form.submit(class="btn btn-success") }}
-  </form>
+  {{ form.submit(class="btn btn-success") }}
+</form>
+
 </section>
 
 <hr class="mt-5 mb-4">

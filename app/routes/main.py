@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request,
 from flask_login import login_required, current_user
 from app.extensions import db
 from app.models.models import CarModel, Car, Order, Owner, OrderItem
-from app.forms.forms import AddCarForm, DeleteCarForm, AdminActionForm
+from app.forms.forms import CarForm, DeleteCarForm, AdminActionForm
 from sqlalchemy.orm import joinedload
 from weasyprint import HTML
 import tempfile

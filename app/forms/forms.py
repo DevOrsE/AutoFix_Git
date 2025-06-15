@@ -47,17 +47,6 @@ class OrderForm(FlaskForm):
     submit = SubmitField("Оформить заказ")
 
 class CarForm(FlaskForm):
-    model_id = SelectField("Модель", coerce=int, validators=[DataRequired()])
-    plate = StringField("Гос. номер", validators=[DataRequired()])
-    year = IntegerField("Год выпуска", validators=[DataRequired(), NumberRange(min=1900, max=2100)])
-    note = TextAreaField("Заметка")
-    submit = SubmitField("Добавить автомобиль")
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.model_id.choices = [(model.id, model.name) for model in CarModel.query.all()]
-
-class CarAddForm(FlaskForm):
     model_id = SelectField('Модель автомобиля', coerce=int, validators=[DataRequired()])
     plate = StringField('Госномер', validators=[DataRequired(), Length(max=20)])
     year = IntegerField('Год выпуска', validators=[DataRequired()])

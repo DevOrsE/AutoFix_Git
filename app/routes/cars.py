@@ -7,8 +7,10 @@ from flask_wtf import FlaskForm
 
 cars_bp = Blueprint("cars", __name__)
 
+
 class DummyDeleteForm(FlaskForm):
     pass
+
 
 @cars_bp.route("/account", methods=["GET", "POST"])
 @login_required

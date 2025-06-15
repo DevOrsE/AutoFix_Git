@@ -1,4 +1,3 @@
-
 let items = [];
 
 function addWorkItem() {
@@ -6,7 +5,6 @@ function addWorkItem() {
   const serviceSelect = document.getElementById("service");
   const bodyPartSelect = document.getElementById("body-part");
 
-  // Защита от пустого выбора кузовной детали
   if (bodyPartSelect.selectedIndex === -1) {
     alert("Выберите кузовную деталь!");
     return;
@@ -23,7 +21,6 @@ function addWorkItem() {
   const priceMatch = serviceText.match(/(\d+(?:[.,]\d+)?)\s*₽/);
   const price = priceMatch ? parseFloat(priceMatch[1].replace(",", ".")) : 0;
 
-
   items.push({
     part_id: parseInt(partId),
     part_text: partText,
@@ -36,7 +33,6 @@ function addWorkItem() {
 
   renderList();
 }
-
 
 function renderList() {
   const list = document.getElementById("items-list");
@@ -100,18 +96,31 @@ function submitOrder() {
   })
   .catch(err => alert("Ошибка при отправке: " + err));
 }
+
 document.addEventListener("DOMContentLoaded", function () {
+  // Обработчики кнопок
+  const addButton = document.getElementById("add-item");
+  const submitButton = document.getElementById("submit-order");
+
+  if (addButton) {
+    addButton.addEventListener("click", addWorkItem);
+  }
+
+  if (submitButton) {
+    submitButton.addEventListener("click", submitOrder);
+  }
+
+  // Обработка завершения заказа (для менеджеров)
   document.querySelectorAll(".btn-complete").forEach(btn => {
     btn.addEventListener("click", function () {
       const orderId = this.dataset.orderId;
       fetch(`/orders/${orderId}/complete`, {
         method: "POST",
         headers: {
-          "X-CSRFToken": getCookie("csrf_token")  // если включён CSRF
+          "X-CSRFToken": getCookie("csrf_token")
         }
       }).then(res => {
         if (res.ok) {
-          // Удаляем карточку
           this.closest(".col").remove();
         } else {
           alert("Не удалось обновить статус.");
@@ -121,7 +130,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// Функция для чтения куки (если CSRF включён)
 function getCookie(name) {
   let cookieValue = null;
   if (document.cookie && document.cookie !== "") {
@@ -136,4 +144,3 @@ function getCookie(name) {
   }
   return cookieValue;
 }
-

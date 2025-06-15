@@ -47,7 +47,7 @@ def account():
         orders = query.all()
         return render_template("account_manager.html", orders=orders, sort=sort)
 
-    form = AddCarForm()
+    form = CarForm()
     form.model_id.choices = [(model.id, model.name) for model in CarModel.query.all()]
 
     if form.validate_on_submit():

@@ -1,9 +1,7 @@
-from wtforms import PasswordField, IntegerField, SubmitField, TextAreaField, SelectField
 from wtforms.validators import EqualTo, Optional
 from flask_wtf.recaptcha import RecaptchaField
-from wtforms.validators import DataRequired, NumberRange
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, TextAreaField, SubmitField, SelectField
+from wtforms import StringField, IntegerField, TextAreaField, SubmitField, SelectField, PasswordField
 from wtforms.validators import DataRequired, Length
 from app.models.models import CarModel
 

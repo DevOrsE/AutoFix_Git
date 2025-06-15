@@ -14,7 +14,7 @@
   {% endif %}
 {% endwith %}
 <section class="account-section">
-  <h2>Добро пожаловать, {{ user.Имя }} {{ user.Фамилия }}!</h2>
+  <h2>Добро пожаловать, {{ user.login }}!</h2>
   <p><strong>Телефон:</strong> {{ user.phone or "Не указан" }}</p>
   <p><strong>Логин:</strong> {{ user.login }}</p>
 

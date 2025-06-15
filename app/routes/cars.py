@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 from app.extensions import db
 from app.models.models import Car, Order
-from app.forms import CarForm
+from app.forms.forms import CarForm
 from flask_wtf import FlaskForm
 
 cars_bp = Blueprint("cars", __name__)

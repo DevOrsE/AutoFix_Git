@@ -54,7 +54,7 @@ def account():
         new_car = Car(
             model_id=form.model_id.data,
             owner_id=current_user.id,
-            plate_number=form.plate.data,
+            plate_number=form.plate_number.data,
             year=form.year.data,
             note=form.note.data
         )

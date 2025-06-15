@@ -7,6 +7,8 @@ from app.models.models import CarModel
 from wtforms.validators import Regexp
 from wtforms import SelectField
 from datetime import datetime
+from wtforms import StringField
+from wtforms.validators import Regexp, InputRequired
 
 year_choices = [(str(y), str(y)) for y in range(2001, datetime.now().year + 1)]
 
@@ -51,10 +53,13 @@ class OrderForm(FlaskForm):
 
 class CarForm(FlaskForm):
     model_id = SelectField('Модель автомобиля', coerce=int, validators=[DataRequired()])
-    plate = StringField("Госномер", validators=[
-        DataRequired(),
-        Regexp(r'^[А-Яа-я]{2}\d{3}[А-Яа-я]$', message="Формат: две буквы, три цифры, одна буква. Пример: НЕ467А")
-    ])
+    plate_number = StringField(
+        "Госномер",
+        validators=[
+            InputRequired(),
+            Regexp(r'^[А-Я]{1}\d{3}[А-Я]{2}\d{2}$', message="Формат: А123ВС45")
+        ]
+    )
     year = SelectField("Год выпуска", choices=year_choices)
     note = TextAreaField('Заметка')
     submit = SubmitField('Добавить')
